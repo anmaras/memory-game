@@ -1,0 +1,75 @@
+:root {
+  /* Colors */
+
+  --Dark-Tangerine: 253, 162, 20;
+  --Charcoal-Solid: 48, 72, 89;
+  --Light-Periwinkle: 188, 206, 217;
+  --Yankees-Blue: 21, 41, 56;
+  --Anti-Flash-White: 242, 242, 242;
+  --Shadow-Blue: 113, 145, 165;
+  --Silver-Lake-Blue: 99, 149, 184;
+  --Lotion-white: 252, 252, 252;
+
+  /* Typography */
+
+  --ff-main: 'Atkinson Hyperlegible', sans-serif;
+
+  --h1-fs: 48px;
+  --h2-fs: 32px;
+  --h3-fs: 24px;
+  --menu-selection-fs: 26px;
+  --buttons-small-fs: 20px;
+  --body-fs: 16px;
+  --game-number-6x6: 44px;
+  --game-number-4x4: 56px;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+}
+
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+input,
+button,
+textarea,
+select {
+  font-family: inherit;
+}
+
+button {
+  border: none;
+  text-align: center;
+  color: rgb(var(--Lotion-white));
+  text-transform: capitalize;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+button:focus,
+button:hover {
+  outline: none;
+}
+
+button:active {
+  scale: 0.98;
+}
+
+body {
+  font-family: var(--ff-main);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}

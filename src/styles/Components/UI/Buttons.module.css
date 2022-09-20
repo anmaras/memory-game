@@ -1,0 +1,25 @@
+.buttonPrimary,
+.buttonSecondary {
+  padding-block: 13px;
+  padding-inline: 24px;
+  font-size: var(--buttons-small-fs);
+  border-radius: 26px;
+}
+
+.buttonPrimary {
+  background-color: rgb(var(--Dark-Tangerine));
+}
+
+.buttonPrimary:hover {
+  background-color: rgba(var(--Dark-Tangerine), 0.8);
+}
+
+.buttonSecondary {
+  color: rgb(var(--Charcoal-Solid));
+  background-color: rgb(var(--Anti-Flash-White));
+}
+
+.buttonSecondary:hover {
+  color: rgb(var(--Lotion-white));
+  background-color: rgb(var(--Silver-Lake-Blue));
+}

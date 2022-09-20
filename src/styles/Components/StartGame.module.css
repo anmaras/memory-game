@@ -1,0 +1,30 @@
+.section--game-start {
+  width: 100%;
+  max-width: 654px;
+  min-width: 327px;
+  display: grid;
+  grid-template-rows: auto 1fr;
+  gap: 32px;
+}
+
+.gameContainer {
+  background-color: rgb(var(--Lotion-white));
+  border-radius: 10px;
+  padding: 24px;
+}
+
+.gameContainer > h3 {
+  color: rgb(var(--Shadow-Blue));
+  text-transform: capitalize;
+  font-size: 13px;
+  margin-bottom: 10px;
+}
+
+.menu--selection-buttons,
+.menu--players-numbers,
+.menu--grid-size {
+  display: grid;
+  grid-auto-flow: column;
+  gap: 11px;
+  margin-bottom: 16px;
+}

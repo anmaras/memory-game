@@ -1,0 +1,13 @@
+.menu--btn-big {
+  width: 100%;
+  background-color: rgb(var(--Dark-Tangerine));
+  border-radius: 35px;
+  padding-block: 16px;
+  font-size: 18px;
+  margin-top: 20px;
+}
+
+.menu--btn-big:hover,
+.menu--btn-big:focus {
+  background-color: rgba(var(--Dark-Tangerine), 0.8);
+}

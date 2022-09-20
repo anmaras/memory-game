@@ -1,0 +1,7 @@
+.app {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  background-color: rgb(var(--Yankees-Blue));
+  padding-inline: 24px;
+}
