@@ -1,0 +1,23 @@
+.grid-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.grid-list-item {
+  border: 1px solid black;
+  font-size: 40px;
+  width: 72px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  text-align: center;
+  background-color: rgb(var(--Charcoal-Solid));
+}
+
+.grid-list-item p {
+  position: relative;
+  display: inline-block;
+  vertical-align: middle;
+  z-index: -1;
+  color: rgb(var(--Lotion-white));
+}

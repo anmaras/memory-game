@@ -1,0 +1,11 @@
+.header {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.game-title {
+  color: rgb(var(--Yankees-Blue));
+  font-size: var(--h2-fs);
+  text-align: center;
+}

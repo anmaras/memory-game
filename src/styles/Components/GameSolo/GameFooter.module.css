@@ -1,0 +1,25 @@
+.footer {
+  display: flex;
+  justify-content: space-between;
+  gap: 1.3rem;
+}
+
+.timer-container,
+.moves-container {
+  flex: 1;
+  text-align: center;
+  background-color: rgb(var(--Light-Periwinkle));
+  padding-block: 0.5rem;
+  border-radius: 8px;
+}
+
+.timer-title,
+.moves-title {
+  color: rgb(var(--Shadow-Blue));
+}
+
+.timer,
+.moves {
+  color: rgb(var(--Charcoal-Solid));
+  font-size: var(--h3-fs);
+}
