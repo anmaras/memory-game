@@ -1,0 +1,7 @@
+.game {
+  padding: 24px;
+  background-color: rgb(var(--Lotion-white));
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  gap: 5rem;
+}
