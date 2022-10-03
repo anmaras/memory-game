@@ -1,12 +1,12 @@
 import React from 'react';
-import { MenuButtonBig, MenuSelection, GameTitle } from './UI';
+import { MenuButtonBig, MenuSelection } from './UI';
 import style from '../styles/Components/StartGame.module.css';
 
 export const StartGame = () => {
   return (
-    <section className={style['section--game-start']}>
+    <article className={style['section--game-start']}>
       <div>
-        <GameTitle />
+        <h1 className={style['game-title']}>memory</h1>
       </div>
       <div className={style.gameContainer}>
         <h3>select theme</h3>
@@ -28,6 +28,6 @@ export const StartGame = () => {
         </div>
         <MenuButtonBig />
       </div>
-    </section>
+    </article>
   );
 };
