@@ -2,6 +2,14 @@
   padding: 24px;
   background-color: rgb(var(--Lotion-white));
   display: grid;
-  grid-template-rows: auto 1fr auto;
+  /* grid-template-rows: auto 1fr auto; */
+  align-content: space-between;
   gap: 5rem;
 }
+
+/* @media screen and (orientation: landscape) {
+  .game {
+    background-color: red;
+    gap: 1rem;
+  }
+} */
