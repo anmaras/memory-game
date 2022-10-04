@@ -9,6 +9,7 @@
   --Shadow-Blue: 113, 145, 165;
   --Silver-Lake-Blue: 99, 149, 184;
   --Lotion-white: 252, 252, 252;
+  --Light-blue: 223, 231, 236;
 
   /* Typography */
 
@@ -20,8 +21,14 @@
   --menu-selection-fs: 26px;
   --buttons-small-fs: 20px;
   --body-fs: 16px;
+  --body-fs-secondary: 14px;
+  --body-fs-small: 13px;
   --game-number-6x6: 44px;
   --game-number-4x4: 56px;
+
+  /* border radius */
+  --border--modal-mobile: 10px;
+  --border--modal-inside: 5px;
 }
 
 *,
