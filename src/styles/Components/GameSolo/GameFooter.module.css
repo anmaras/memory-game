@@ -8,7 +8,7 @@
 .moves-container {
   flex: 1;
   text-align: center;
-  background-color: rgb(var(--Light-Periwinkle));
+  background-color: rgb(var(--Light-blue));
   padding-block: 0.5rem;
   border-radius: 8px;
 }
@@ -16,10 +16,26 @@
 .timer-title,
 .moves-title {
   color: rgb(var(--Shadow-Blue));
+  font-size: var(--info-text);
 }
 
 .timer,
 .moves {
   color: rgb(var(--Charcoal-Solid));
-  font-size: var(--h3-fs);
+  font-size: var(--info-data);
+}
+
+@media screen and (min-width: 768px) {
+  .footer {
+    margin: auto;
+    width: 532px;
+  }
+
+  .timer-container,
+  .moves-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem;
+  }
 }

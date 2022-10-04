@@ -6,6 +6,6 @@
 
 .game-title {
   color: rgb(var(--Yankees-Blue));
-  font-size: var(--h2-fs);
+  font-size: var(--startGame-title);
   text-align: center;
 }

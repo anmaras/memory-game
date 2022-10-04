@@ -1,17 +1,22 @@
 .grid-container {
+  display: grid;
+  place-items: center;
 }
 
 .grid-list {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
+  /* max-width: 532px; */
+  width: 326.88px;
 }
 
 .list16 {
-  gap: 12px;
+  gap: var(--grid-width-4x4-gap);
 }
 
 .list36 {
-  gap: 9px;
+  gap: var(--grid-width-6x6-gap);
 }
 
 .grid-list-item {
@@ -24,13 +29,13 @@
 }
 
 .grid16 {
-  font-size: 40px;
-  width: 72px;
+  width: var(--grid-width-4x4);
+  font-size: var(--grid-width-4x4-fs);
 }
 
 .grid36 {
-  width: 46px;
-  font-size: 24px;
+  width: var(--grid-width-6x6);
+  font-size: var(--grid-width-6x6-fs);
 }
 
 .grid-item {
@@ -48,4 +53,10 @@
 
 .iconIsPair {
   background-color: rgb(var(--Dark-Tangerine));
+}
+
+@media screen and (min-width: 768px) {
+  .grid-list {
+    width: 572px;
+  }
 }
