@@ -16,7 +16,7 @@
 
 .buttonSecondary {
   color: rgb(var(--Charcoal-Solid));
-  background-color: rgb(var(--Anti-Flash-White));
+  background-color: rgb(var(--Light-blue));
 }
 
 .buttonSecondary:hover {
