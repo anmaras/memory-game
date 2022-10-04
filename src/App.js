@@ -1,11 +1,13 @@
 import style from './styles/App/App.module.css';
 
-import { StartGame } from './Components';
+import { Game, StartGame, GameModal } from './Components';
 
 function App() {
   return (
     <main className={style.app}>
-      <StartGame />
+      {/* <StartGame /> */}
+      <GameModal />
+      <Game />
     </main>
   );
 }
