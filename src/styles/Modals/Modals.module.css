@@ -19,6 +19,7 @@
   background-color: rgb(var(--Anti-Flash-White));
   padding: 1.25rem;
   border-radius: var(--border--modal-mobile);
+  max-width: 654px;
 }
 
 .header {
@@ -28,13 +29,13 @@
 
 .title {
   line-height: 1;
-  font-size: var(--h3-fs);
+  font-size: var(--modal-title);
   color: rgb(var(--Yankees-Blue));
   margin-block: 0.5rem;
 }
 
 .title + p {
-  font-size: var(--body-fs-secondary);
+  font-size: var(--modal-para);
   color: rgb(var(--Shadow-Blue));
 }
 
@@ -58,13 +59,13 @@
 .time-text,
 .moves-text {
   color: rgb(var(--Shadow-Blue));
-  font-size: var(--body-fs-small);
+  font-size: var(--modal-time-text);
 }
 
 .time,
 .moves {
   color: rgb(var(--Charcoal-Solid));
-  font-size: var(--buttons-small-fs);
+  font-size: var(--modal-data);
 }
 
 .footer {
@@ -72,4 +73,24 @@
   flex-direction: column;
   justify-content: center;
   gap: 1rem;
+}
+
+.footer > * {
+  font-size: var(--modal-btns);
+}
+
+@media screen and (min-width: 768px) {
+  .modal-container {
+    padding: 3rem;
+  }
+
+  .info-wrapper {
+    gap: 1rem;
+  }
+  .footer {
+    flex-direction: row;
+  }
+  .footer > * {
+    flex: 1;
+  }
 }
