@@ -12,12 +12,34 @@
   --Light-blue: 223, 231, 236;
 
   /* Typography */
-
   --ff-main: 'Atkinson Hyperlegible', sans-serif;
+
+  /* startGame */
+  --startGame-title: 32px;
+  --startGame-text: 15px;
+  --button-big: 18px;
+  --button: 16px;
+
+  /* game*/
+  --grid-width-4x4: 72px;
+  --grid-width-4x4-fs: 40px;
+  --grid-width-4x4-gap: 12px;
+  --grid-width-6x6: 46px;
+  --grid-width-6x6-fs: 24px;
+  --grid-width-6x6-gap: 9px;
+  --info-text: 15px;
+  --info-data: 24px;
+
+  /* modal */
+  --modal-title: 24px;
+  --modal-para: 14px;
+  --modal-time-text: 13px;
+  --modal-data: 20px;
+  --modal-btns: 18px;
 
   --h1-fs: 48px;
   --h2-fs: 32px;
-  --h3-fs: 24px;
+  --h3-fs: 15px;
   --menu-selection-fs: 26px;
   --buttons-small-fs: 20px;
   --body-fs: 16px;
@@ -29,6 +51,31 @@
   /* border radius */
   --border--modal-mobile: 10px;
   --border--modal-inside: 5px;
+}
+
+@media screen and (min-width: 768px) {
+  :root {
+    /* startGame */
+    --startGame-title: 40px;
+    --startGame-text: 20px;
+    --button-big: 32px;
+    --button: 26px;
+    /* game*/
+    --grid-width-4x4: 118px;
+    --grid-width-4x4-fs: 56px;
+    --grid-width-4x4-gap: 20px;
+    --grid-width-6x6: 82px;
+    --grid-width-6x6-fs: 44px;
+    --grid-width-6x6-gap: 16px;
+    --info-text: 18px;
+    --info-data: 32px;
+    /* modal */
+    --modal-title: 48px;
+    --modal-para: 18px;
+    --modal-time-text: 18px;
+    --modal-data: 32px;
+    --modal-btns: 20px;
+  }
 }
 
 *,
@@ -69,7 +116,7 @@ button {
 
 button:focus,
 button:hover {
-  outline: none;
+  outline: 2px solid rgb(240, 84, 27);
 }
 
 button:active {
