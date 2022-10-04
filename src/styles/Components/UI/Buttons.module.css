@@ -2,7 +2,7 @@
 .buttonSecondary {
   padding-block: 13px;
   padding-inline: 24px;
-  font-size: var(--buttons-small-fs);
+  font-size: var(--button);
   border-radius: 26px;
 }
 

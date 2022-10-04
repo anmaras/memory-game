@@ -3,7 +3,7 @@
   background-color: rgb(var(--Dark-Tangerine));
   border-radius: 35px;
   padding-block: 16px;
-  font-size: 18px;
+  font-size: var(--button-big);
   margin-top: 20px;
 }
 
