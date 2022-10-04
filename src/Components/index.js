@@ -1,6 +1,5 @@
 import { StartGame } from './StartGame';
 import { Game } from './Game';
-import GameEndModal from './GameModals/GameEndModal';
-import { GameMenuModal } from './GameModals/GameMenuModal';
+import GameModal from './GameModal/GameModal';
 
-export { StartGame, Game, GameEndModal, GameMenuModal };
+export { StartGame, Game, GameModal };
