@@ -1,23 +1,51 @@
+.grid-container {
+}
+
 .grid-list {
   display: flex;
   flex-wrap: wrap;
+}
+
+.list16 {
   gap: 12px;
 }
 
+.list36 {
+  gap: 9px;
+}
+
 .grid-list-item {
-  border: 1px solid black;
-  font-size: 40px;
-  width: 72px;
   aspect-ratio: 1;
   border-radius: 50%;
   text-align: center;
   background-color: rgb(var(--Charcoal-Solid));
+  display: grid;
+  place-items: center;
 }
 
-.grid-list-item p {
+.grid16 {
+  font-size: 40px;
+  width: 72px;
+}
+
+.grid36 {
+  width: 46px;
+  font-size: 24px;
+}
+
+.grid-item {
   position: relative;
-  display: inline-block;
-  vertical-align: middle;
-  z-index: -1;
   color: rgb(var(--Lotion-white));
+}
+
+.iconHidden {
+  z-index: -10;
+}
+
+.iconSelected {
+  background-color: rgb(var(--Light-Periwinkle));
+}
+
+.iconIsPair {
+  background-color: rgb(var(--Dark-Tangerine));
 }
