@@ -5,7 +5,8 @@
   border-radius: 26px;
 }
 
-.menuSelection:hover {
+.menuSelection:hover,
+.menuSelection:focus {
   background-color: rgb(var(--Silver-Lake-Blue));
 }
 
