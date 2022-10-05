@@ -1,15 +1,17 @@
 import React from 'react';
+import { useState } from 'react';
 import { ButtonSecondary, ButtonPrimary } from '../UI';
 import style from '../../styles/Modals/Modals.module.css';
+import btnStyle from '../../styles/Components/UI/Buttons.module.css';
 
-const GameEndModal = () => {
-  const isValid = false;
+const GameEndModal = ({ modal, newGame, restartGame }) => {
+  const [menu, setMenu] = useState(false);
 
   return (
     <>
-      <div className={style.backdrop}></div>
+      <div className={style.backdrop} onClick={() => modal(false)}></div>
       <article className={style['modal-container']}>
-        {isValid ? (
+        {menu ? (
           <>
             <header className={style.header}>
               <h3 className={style.title}>You did it!</h3>
@@ -32,9 +34,12 @@ const GameEndModal = () => {
           </>
         ) : (
           <footer className={style.footer}>
-            <ButtonPrimary />
-            <ButtonSecondary textInput="new game" />
-            <ButtonSecondary textInput="resume games" />
+            <>
+              <button className={btnStyle.buttonPrimary} onClick={restartGame}>
+                restart
+              </button>
+            </>
+            <ButtonSecondary textInput="new game" onClick={newGame} />
           </footer>
         )}
       </article>
