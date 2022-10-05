@@ -1,5 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
-import { GameGridItem } from './GameGridItem';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { iconArr6x6, iconArr4x4 } from '../../../utils/helpers/iconArrayMaker';
 import style from '../../../styles/Components/GameSolo/GameGrid.module.css';
@@ -8,6 +7,18 @@ const GameGrid = React.memo(({ theme, grid, shuffling }) => {
   const [finalArray, setFinalArray] = useState([]);
   const [iconArr, setIconArr] = useState([]);
   const [number, setNumber] = useState(0);
+  const [isActive, setIsActive] = useState(false);
+  const [id, setId] = useState('');
+
+  const [player, setPlayer] = useState({
+    moveA: null,
+    moveB: null,
+    firstMove: false,
+    secondMove: false,
+    movesComplete: false,
+    foundPair: null,
+    currId: null,
+  });
 
   const shuffle = (c) => {
     let num = '';
@@ -46,6 +57,68 @@ const GameGrid = React.memo(({ theme, grid, shuffling }) => {
     }
   }, [grid, iconArray, numberArray, theme, shuffling]);
 
+  const playerMove = (e, id) => {
+    let value = '';
+    // const value = e.currentTarget.firstChild.textContent;
+    if (theme === 'icons') {
+      value = e.currentTarget.firstChild.firstChild.dataset.icon;
+    } else {
+      value = e.currentTarget.firstChild.textContent;
+    }
+
+    if (!player.firstMove) {
+      setPlayer({ ...player, moveA: value, firstMove: true, currId: id });
+    } else if (!player.secondMove && player.currId !== id) {
+      setPlayer({
+        ...player,
+        moveB: value,
+        secondMove: true,
+        movesComplete: true,
+      });
+    }
+
+    // if (+e.currentTarget.id === id) {
+    //   setIsActive(true);
+    //   setId(id);
+    // }
+    // let value = '';
+
+    // }
+    // setSelection(value);
+  };
+
+  const resetMoves = () => {
+    setPlayer({
+      moveA: null,
+      moveB: null,
+      firstMove: false,
+      secondMove: false,
+      movesComplete: false,
+      foundPair: null,
+      currId: null,
+    });
+  };
+
+  const checkMoves = useCallback(
+    (moveA, moveB) => {
+      if (player.firstMove && player.secondMove && player.movesComplete) {
+        if (moveA === moveB) {
+          console.log('point');
+        } else {
+          console.log('no point');
+        }
+        resetMoves();
+      }
+    },
+    [player.firstMove, player.movesComplete, player.secondMove]
+  );
+
+  useEffect(() => {
+    checkMoves(player.moveA, player.moveB);
+  }, [player.moveA, player.moveB, checkMoves]);
+
+  console.log(player);
+
   return (
     <section className={style['grid-container']}>
       <ul
@@ -58,12 +131,22 @@ const GameGrid = React.memo(({ theme, grid, shuffling }) => {
           return (
             <li
               className={[
-                style['grid-list-item'],
+                `${style['grid-list-item']}`,
                 `${grid === 6 ? style.grid36 : style.grid16}`,
+                `${isActive && id === index && style.iconSelected}`,
               ].join(' ')}
               key={index}
+              onClick={(e) => playerMove(e, index)}
+              id={index}
             >
-              <GameGridItem input={item} />
+              <p
+                className={[
+                  style['grid-item'],
+                  `${isActive && id === index && style.iconVisible}`,
+                ].join(' ')}
+              >
+                {item}
+              </p>
             </li>
           );
         })}
