@@ -78,4 +78,4 @@ const numberArray = (size) => {
   return shuffle([...Array(num).keys(), ...Array(num).keys()]);
 };
 
-export { iconArray, numberArray };
+export { iconArray, numberArray, iconArr6x6, iconArr4x4, shuffle };
