@@ -5,6 +5,7 @@ import { playerReducer } from '../../../Reducers/playerReducer';
 import style from '../../../styles/Components/GameSolo/GameGrid.module.css';
 
 const initialPlayerValues = {
+  gameStarted: false,
   moveA: null,
   moveB: null,
   firstMove: false,
@@ -13,16 +14,13 @@ const initialPlayerValues = {
   currId: null,
   pairs: [],
   gameOver: false,
+  playerMoves: 0,
 };
 
-const GameGrid = React.memo(({ theme, grid, shuffling }) => {
+const GameGrid = React.memo(({ theme, grid, shuffling, getMoves }) => {
   const [finalArray, setFinalArray] = useState([]);
   const [iconArr, setIconArr] = useState([]);
   const [number, setNumber] = useState(0);
-  const [pairsList, setPairList] = useState([]);
-  // const [isActive, setIsActive] = useState(false);
-  // const [id, setId] = useState('');
-
   const [playerState, dispatch] = useReducer(
     playerReducer,
     initialPlayerValues
@@ -74,14 +72,24 @@ const GameGrid = React.memo(({ theme, grid, shuffling }) => {
     } else {
       value = e.currentTarget.firstChild.textContent;
     }
+
+    if (playerState.pairs.includes(+value)) {
+      return;
+    }
+
     if (!playerState.firstMove) {
       return dispatch({
         type: 'FIRST_MOVE',
         payload: { value: value, id: id },
       });
     }
+
     if (!playerState.secondMove && playerState.currId !== id) {
       return dispatch({ type: 'SECOND_MOVE', payload: value });
+    }
+
+    if (playerState.pairs.length === finalArray.length) {
+      dispatch({ type: 'GAME_OVER' });
     }
   };
 
@@ -106,52 +114,18 @@ const GameGrid = React.memo(({ theme, grid, shuffling }) => {
         type: 'NOT_PAIRS',
       });
     }
+    console.log(playerState);
   }, [playerState]);
-  console.log(playerState, finalArray);
 
-  // console.log(playerState, pairsList);
+  useEffect(() => {
+    if (playerState.pairs.length === finalArray.length) {
+      return dispatch({ type: 'GAME_OVER' });
+    }
+  }, [playerState.pairs.length, finalArray.length]);
 
-  // useEffect(() => {
-  //   if (playerState.moveA === playerState.moveB) {
-  //     const newPair = [playerState.moveA, playerState.moveB];
-  //     dispatch({
-  //       type: 'PAIR',
-  //       payload: newPair,
-  //     });
-  //   }
-  // }, [playerState.moveA, playerState.moveB]);
-
-  // const resetMoves = () => {
-  //   setPlayer({
-  //     moveA: null,
-  //     moveB: null,
-  //     firstMove: false,
-  //     secondMove: false,
-  //     movesComplete: false,
-  //     foundPair: false,
-  //     currId: null,
-  //   });
-  // };
-
-  // useEffect(() => {
-  //   if (player.firstMove && player.secondMove) {
-  //     if (player.moveA === player.moveB) {
-  //       setPair(true);
-  //       // setPlayer(initialPlayerValues);
-  //       setPairs([...pairs, player.moveA, player.moveB].map(Number));
-  //     } else {
-  //       console.log('no point');
-  //       // setPlayer(initialPlayerValues);
-  //     }
-  //   }
-  // }, [player.firstMove, player.moveA, player.moveB, player.secondMove]);
-
-  // useEffect(() => {
-  //   console.log('its a pair');
-  // }, [isPair]);
-
-  // console.log(playerState);
-  // console.log(playerState);
+  useEffect(() => {
+    getMoves(playerState.playerMoves);
+  }, [playerState.playerMoves, getMoves]);
 
   return (
     <section className={style['grid-container']}>
