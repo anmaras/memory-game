@@ -1,7 +1,7 @@
 import React from 'react';
 import style from '../../../styles/Components/GameSolo/GameFooter.module.css';
 
-export const GameFooter = () => {
+export const GameFooter = ({ playerMoves }) => {
   return (
     <footer className={style.footer}>
       <div className={style['timer-container']}>
@@ -10,7 +10,7 @@ export const GameFooter = () => {
       </div>
       <div className={style['moves-container']}>
         <h3 className={style['moves-title']}>Moves</h3>
-        <p className={style.moves}>0</p>
+        <p className={style.moves}>{playerMoves}</p>
       </div>
     </footer>
   );
