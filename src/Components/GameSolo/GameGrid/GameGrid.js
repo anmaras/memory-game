@@ -1,24 +1,32 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useReducer, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { iconArr6x6, iconArr4x4 } from '../../../utils/helpers/iconArrayMaker';
+import { playerReducer } from '../../../Reducers/playerReducer';
 import style from '../../../styles/Components/GameSolo/GameGrid.module.css';
+
+const initialPlayerValues = {
+  moveA: null,
+  moveB: null,
+  firstMove: false,
+  secondMove: false,
+  movesComplete: false,
+  currId: null,
+  pairs: [],
+  gameOver: false,
+};
 
 const GameGrid = React.memo(({ theme, grid, shuffling }) => {
   const [finalArray, setFinalArray] = useState([]);
   const [iconArr, setIconArr] = useState([]);
   const [number, setNumber] = useState(0);
-  const [isActive, setIsActive] = useState(false);
-  const [id, setId] = useState('');
+  const [pairsList, setPairList] = useState([]);
+  // const [isActive, setIsActive] = useState(false);
+  // const [id, setId] = useState('');
 
-  const [player, setPlayer] = useState({
-    moveA: null,
-    moveB: null,
-    firstMove: false,
-    secondMove: false,
-    movesComplete: false,
-    foundPair: null,
-    currId: null,
-  });
+  const [playerState, dispatch] = useReducer(
+    playerReducer,
+    initialPlayerValues
+  );
 
   const shuffle = (c) => {
     let num = '';
@@ -57,67 +65,93 @@ const GameGrid = React.memo(({ theme, grid, shuffling }) => {
     }
   }, [grid, iconArray, numberArray, theme, shuffling]);
 
+  /* player moves */
+
   const playerMove = (e, id) => {
     let value = '';
-    // const value = e.currentTarget.firstChild.textContent;
     if (theme === 'icons') {
       value = e.currentTarget.firstChild.firstChild.dataset.icon;
     } else {
       value = e.currentTarget.firstChild.textContent;
     }
-
-    if (!player.firstMove) {
-      setPlayer({ ...player, moveA: value, firstMove: true, currId: id });
-    } else if (!player.secondMove && player.currId !== id) {
-      setPlayer({
-        ...player,
-        moveB: value,
-        secondMove: true,
-        movesComplete: true,
+    if (!playerState.firstMove) {
+      return dispatch({
+        type: 'FIRST_MOVE',
+        payload: { value: value, id: id },
       });
     }
-
-    // if (+e.currentTarget.id === id) {
-    //   setIsActive(true);
-    //   setId(id);
-    // }
-    // let value = '';
-
-    // }
-    // setSelection(value);
+    if (!playerState.secondMove && playerState.currId !== id) {
+      return dispatch({ type: 'SECOND_MOVE', payload: value });
+    }
   };
-
-  const resetMoves = () => {
-    setPlayer({
-      moveA: null,
-      moveB: null,
-      firstMove: false,
-      secondMove: false,
-      movesComplete: false,
-      foundPair: null,
-      currId: null,
-    });
-  };
-
-  const checkMoves = useCallback(
-    (moveA, moveB) => {
-      if (player.firstMove && player.secondMove && player.movesComplete) {
-        if (moveA === moveB) {
-          console.log('point');
-        } else {
-          console.log('no point');
-        }
-        resetMoves();
-      }
-    },
-    [player.firstMove, player.movesComplete, player.secondMove]
-  );
 
   useEffect(() => {
-    checkMoves(player.moveA, player.moveB);
-  }, [player.moveA, player.moveB, checkMoves]);
+    if (
+      playerState.moveA &&
+      playerState.moveB &&
+      playerState.moveA === playerState.moveB
+    ) {
+      return dispatch({
+        type: 'PAIRS',
+        payloadA: playerState.moveA,
+        payloadB: playerState.moveB,
+      });
+    }
+    if (
+      playerState.moveA &&
+      playerState.moveB &&
+      playerState.moveA !== playerState.moveB
+    ) {
+      return dispatch({
+        type: 'NOT_PAIRS',
+      });
+    }
+  }, [playerState]);
+  console.log(playerState, finalArray);
 
-  console.log(player);
+  // console.log(playerState, pairsList);
+
+  // useEffect(() => {
+  //   if (playerState.moveA === playerState.moveB) {
+  //     const newPair = [playerState.moveA, playerState.moveB];
+  //     dispatch({
+  //       type: 'PAIR',
+  //       payload: newPair,
+  //     });
+  //   }
+  // }, [playerState.moveA, playerState.moveB]);
+
+  // const resetMoves = () => {
+  //   setPlayer({
+  //     moveA: null,
+  //     moveB: null,
+  //     firstMove: false,
+  //     secondMove: false,
+  //     movesComplete: false,
+  //     foundPair: false,
+  //     currId: null,
+  //   });
+  // };
+
+  // useEffect(() => {
+  //   if (player.firstMove && player.secondMove) {
+  //     if (player.moveA === player.moveB) {
+  //       setPair(true);
+  //       // setPlayer(initialPlayerValues);
+  //       setPairs([...pairs, player.moveA, player.moveB].map(Number));
+  //     } else {
+  //       console.log('no point');
+  //       // setPlayer(initialPlayerValues);
+  //     }
+  //   }
+  // }, [player.firstMove, player.moveA, player.moveB, player.secondMove]);
+
+  // useEffect(() => {
+  //   console.log('its a pair');
+  // }, [isPair]);
+
+  // console.log(playerState);
+  // console.log(playerState);
 
   return (
     <section className={style['grid-container']}>
@@ -133,16 +167,18 @@ const GameGrid = React.memo(({ theme, grid, shuffling }) => {
               className={[
                 `${style['grid-list-item']}`,
                 `${grid === 6 ? style.grid36 : style.grid16}`,
-                `${isActive && id === index && style.iconSelected}`,
+                // `${isActive && id === index && style.iconSelected}`,
               ].join(' ')}
               key={index}
-              onClick={(e) => playerMove(e, index)}
+              onClick={(e) => {
+                playerMove(e, index);
+              }}
               id={index}
             >
               <p
                 className={[
                   style['grid-item'],
-                  `${isActive && id === index && style.iconVisible}`,
+                  // `${isActive && id === index && style.iconVisible}`,
                 ].join(' ')}
               >
                 {item}
