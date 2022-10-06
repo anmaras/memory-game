@@ -1,10 +1,15 @@
 export const playerReducer = (state, action) => {
+  if (action.type === 'GAME_STARTED') {
+    return { ...state, gameStarted: true };
+  }
+
   if (action.type === 'FIRST_MOVE') {
     return {
       ...state,
       moveA: action.payload.value,
       firstMove: true,
       currId: action.payload.id,
+      gameStarted: true,
     };
   }
   if (action.type === 'SECOND_MOVE') {
@@ -13,6 +18,7 @@ export const playerReducer = (state, action) => {
       moveB: action.payload,
       secondMove: true,
       movesComplete: true,
+      playerMoves: state.playerMoves + 1,
     };
   }
 
@@ -42,6 +48,10 @@ export const playerReducer = (state, action) => {
       movesComplete: false,
       currId: null,
     };
+  }
+
+  if (action.type === 'GAME_OVER') {
+    return { ...state, gameOver: true, gameStarted: false };
   }
 
   return state;
