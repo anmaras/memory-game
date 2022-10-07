@@ -15,10 +15,11 @@ const initialPlayerValues = {
   gameOver: false,
   playerMoves: 0,
   movesComplete: false,
+  time: null,
 };
 
 const GameGrid = React.memo(
-  ({ theme, grid, shuffling, getMoves, getGameStart }) => {
+  ({ theme, grid, shuffling, getGameStart, getData }) => {
     const [finalArray, setFinalArray] = useState([]);
     const [iconArr, setIconArr] = useState([]);
     const [number, setNumber] = useState(0);
@@ -28,7 +29,7 @@ const GameGrid = React.memo(
       initialPlayerValues
     );
 
-    const { pairs, gameStarted, moveA, moveB, playerMoves } = playerState;
+    const { pairs, gameStarted, moveA, moveB } = playerState;
 
     const shuffle = (c) => {
       let num = '';
@@ -118,9 +119,8 @@ const GameGrid = React.memo(
     }, [pairs.length, finalArray.length, gameStarted]);
 
     useEffect(() => {
-      getMoves(playerMoves);
-      getGameStart(gameStarted);
-    }, [playerMoves, getMoves, gameStarted, getGameStart]);
+      getData(playerState);
+    }, [getData, playerState]);
 
     return (
       <section className={style['grid-container']}>

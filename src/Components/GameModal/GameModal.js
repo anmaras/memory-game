@@ -4,12 +4,22 @@ import { ButtonSecondary, ButtonPrimary } from '../UI';
 import style from '../../styles/Modals/Modals.module.css';
 import btnStyle from '../../styles/Components/UI/Buttons.module.css';
 
-const GameEndModal = ({ modal, newGame, restartGame }) => {
-  const [menu, setMenu] = useState(false);
+const GameEndModal = ({
+  modalVisibility,
+  startNewGame,
+  restartGame,
+  time,
+  data,
+}) => {
+  const { playerMoves, gameOver } = data;
+  const [menu, setMenu] = useState(gameOver);
 
   return (
     <>
-      <div className={style.backdrop} onClick={() => modal(false)}></div>
+      <div
+        className={style.backdrop}
+        onClick={() => modalVisibility(false)}
+      ></div>
       <article className={style['modal-container']}>
         {menu ? (
           <>
@@ -20,16 +30,19 @@ const GameEndModal = ({ modal, newGame, restartGame }) => {
             <section className={style['info-wrapper']}>
               <div>
                 <p className={style['time-text']}>Time Elapsed</p>
-                <p className={style.time}>0:00</p>
+                <p className={style.time}>{time}</p>
               </div>
               <div>
                 <p className={style['moves-text']}>Moves Taken</p>
-                <p className={style.moves}>00 Moves</p>
+                <p className={style.moves}>{playerMoves} Moves</p>
               </div>
             </section>
             <footer className={style.footer}>
               <ButtonPrimary />
-              <ButtonSecondary textInput="Setup New Game" />
+              <ButtonSecondary
+                textInput="Setup New Game"
+                onClick={startNewGame}
+              />
             </footer>
           </>
         ) : (
@@ -39,7 +52,7 @@ const GameEndModal = ({ modal, newGame, restartGame }) => {
                 restart
               </button>
             </>
-            <ButtonSecondary textInput="new game" onClick={newGame} />
+            <ButtonSecondary textInput="new game" onClick={startNewGame} />
           </footer>
         )}
       </article>

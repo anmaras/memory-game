@@ -8,21 +8,34 @@ function App() {
   const [gameStarted, setGameStarted] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
   const [shuffle, setShuffle] = useState(false);
+  const [timeToComplete, setTimeToComplete] = useState(0);
+  const [data, setData] = useState({});
 
   const updateTheme = (input) => setTheme(input);
   const selectGridSize = (input) => setGridSize(input);
   const startGame = (input) => (theme && gridSize ? setGameStarted(input) : '');
   const modalVisibility = (input) => setModalVisible(input);
+
   const newGame = () => {
     setTheme(null);
     setGridSize(null);
     setGameStarted(false);
     setModalVisible(false);
   };
+
   const restartGame = () => {
     setShuffle(!shuffle);
   };
 
+  const getPlayerTime = (value) => {
+    setTimeToComplete(value);
+  };
+
+  const getData = (data) => {
+    setData(data);
+  };
+
+  // console.log('data', data);
   if (!gameStarted) {
     return (
       <main className={style.app}>
@@ -37,17 +50,24 @@ function App() {
     return (
       <main className={style.app}>
         <Game
+          getData={getData}
           theme={theme}
           grid={gridSize}
-          modal={modalVisibility}
+          modalVisibility={modalVisibility}
           shuffle={shuffle}
+          getPlayerTime={getPlayerTime}
+          data={data}
         />
-        {modalVisible && (
+        {modalVisible || data.gameOver ? (
           <GameModal
-            modal={modalVisibility}
-            newGame={newGame}
+            modalVisibility={modalVisibility}
+            startNewGame={newGame}
             restartGame={restartGame}
+            time={timeToComplete}
+            data={data}
           />
+        ) : (
+          ''
         )}
       </main>
     );
