@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { GameHeader, GameGrid, GameFooter } from './GameSolo';
 import style from '../styles/Components/Game.module.css';
 
