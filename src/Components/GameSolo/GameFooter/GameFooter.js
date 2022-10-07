@@ -5,17 +5,18 @@ export const GameFooter = ({ getPlayerTime, data }) => {
   const [timer, setTimer] = useState(0);
   const countRef = useRef(null);
   const timerRef = useRef('0');
-  const { gameStarted, playerMoves } = data;
+  const { gameStarted, playerMoves, gameOver } = data;
 
   useEffect(() => {
-    if (gameStarted) {
-      countRef.current = setInterval(() => {
-        setTimer((prev) => prev + 1);
-      }, 1000);
-    } else {
+    clearInterval(countRef.current);
+    countRef.current = setInterval(() => {
+      setTimer((prev) => prev + 1);
+    }, 1000);
+
+    if (gameOver) {
       clearInterval(countRef.current);
     }
-  }, [gameStarted]);
+  }, [gameStarted, gameOver]);
 
   useEffect(() => {
     getPlayerTime(timerRef.current.textContent);
