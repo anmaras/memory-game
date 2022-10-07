@@ -1,7 +1,5 @@
 export const playerReducer = (state, action) => {
-  if (action.type === 'GAME_STARTED') {
-    return { ...state, gameStarted: true };
-  }
+  console.log(action.type);
 
   if (action.type === 'FIRST_MOVE') {
     return {
@@ -17,30 +15,27 @@ export const playerReducer = (state, action) => {
       ...state,
       moveB: action.payload,
       secondMove: true,
-      movesComplete: true,
       playerMoves: state.playerMoves + 1,
+      movesComplete: true,
     };
   }
-
-  if (action.type === 'PAIRS') {
-    const newItems = [...state.pairs, action.payloadA, action.payloadB].map(
-      Number
-    );
-
+  if (action.type === 'NOT_PAIRS') {
     return {
       ...state,
-      pairs: newItems,
       moveA: null,
       moveB: null,
       firstMove: false,
       secondMove: false,
       movesComplete: false,
+      currId: null,
     };
   }
 
-  if (action.type === 'NOT_PAIRS') {
+  if (action.type === 'PAIRS') {
+    const newItems = [...state.pairs, action.payloadA, action.payloadB];
     return {
       ...state,
+      pairs: newItems,
       moveA: null,
       moveB: null,
       firstMove: false,
