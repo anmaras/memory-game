@@ -19,7 +19,6 @@
 }
 
 .grid-list-item {
-  user-select: none;
   aspect-ratio: 1;
   border-radius: 50%;
   text-align: center;
@@ -36,7 +35,7 @@
 
 .grid-item {
   position: relative;
-  /* z-index: -1; */
+  z-index: -1;
   color: rgb(var(--Lotion-white));
 }
 
@@ -59,11 +58,34 @@
 }
 
 .iconSelected {
+  z-index: 0;
   background-color: rgb(var(--Light-Periwinkle));
+  transition: 0.3s;
+}
+
+@keyframes isPair {
+  from {
+    scale: 1;
+  }
+  to {
+    scale: 1.1;
+  }
+}
+
+.iconNotPair {
+  background-color: rgb(var(--Charcoal-Solid));
+  transition: 0.7s ease-out;
 }
 
 .iconIsPair {
+  z-index: 0;
   background-color: rgb(var(--Dark-Tangerine));
+  transition: 0.3s;
+  animation-name: isPair;
+  animation-duration: 0.25s;
+  animation-iteration-count: 2;
+  animation-direction: alternate;
+  animation-timing-function: ease-in-out;
 }
 
 @media screen and (min-width: 768px) {
