@@ -10,11 +10,11 @@ const initialPlayerValues = {
   moveB: null,
   firstMove: false,
   secondMove: false,
-  movesComplete: false,
   currId: null,
   pairs: [],
   gameOver: false,
   playerMoves: 0,
+  movesComplete: false,
 };
 
 const GameGrid = React.memo(
@@ -22,10 +22,13 @@ const GameGrid = React.memo(
     const [finalArray, setFinalArray] = useState([]);
     const [iconArr, setIconArr] = useState([]);
     const [number, setNumber] = useState(0);
+
     const [playerState, dispatch] = useReducer(
       playerReducer,
       initialPlayerValues
     );
+
+    const { pairs, gameStarted, moveA, moveB, playerMoves } = playerState;
 
     const shuffle = (c) => {
       let num = '';
@@ -65,7 +68,6 @@ const GameGrid = React.memo(
     }, [grid, iconArray, numberArray, theme, shuffling]);
 
     /* player moves */
-
     const playerMove = (e, id) => {
       let value = '';
       if (theme === 'icons') {
@@ -74,10 +76,12 @@ const GameGrid = React.memo(
         value = e.currentTarget.firstChild.textContent;
       }
 
-      if (playerState.pairs.includes(+value)) {
+      /* if pair array include value return */
+      if (playerState.pairs.includes(value)) {
         return;
       }
 
+      /* if player has not done a move yet  */
       if (!playerState.firstMove) {
         return dispatch({
           type: 'FIRST_MOVE',
@@ -85,54 +89,38 @@ const GameGrid = React.memo(
         });
       }
 
+      /* if player has done the first move and its not the previous move */
       if (!playerState.secondMove && playerState.currId !== id) {
         return dispatch({ type: 'SECOND_MOVE', payload: value });
-      }
-
-      if (playerState.pairs.length === finalArray.length) {
-        dispatch({ type: 'GAME_OVER' });
       }
     };
 
     useEffect(() => {
-      if (
-        playerState.moveA &&
-        playerState.moveB &&
-        playerState.moveA === playerState.moveB
-      ) {
+      if (moveA && moveB && moveA === moveB) {
         return dispatch({
           type: 'PAIRS',
-          payloadA: playerState.moveA,
-          payloadB: playerState.moveB,
+          payloadA: moveA,
+          payloadB: moveB,
         });
       }
-      if (
-        playerState.moveA &&
-        playerState.moveB &&
-        playerState.moveA !== playerState.moveB
-      ) {
+      if (moveA && moveB && moveA !== moveB) {
         return dispatch({
           type: 'NOT_PAIRS',
         });
       }
       console.log(playerState);
-    }, [playerState]);
+    }, [playerState, moveA, moveB]);
 
     useEffect(() => {
-      if (playerState.pairs.length === finalArray.length) {
+      if (pairs.length === finalArray.length && gameStarted) {
         return dispatch({ type: 'GAME_OVER' });
       }
-    }, [playerState.pairs.length, finalArray.length]);
+    }, [pairs.length, finalArray.length, gameStarted]);
 
     useEffect(() => {
-      getMoves(playerState.playerMoves);
-      getGameStart(playerState.gameStarted);
-    }, [
-      playerState.playerMoves,
-      getMoves,
-      playerState.gameStarted,
-      getGameStart,
-    ]);
+      getMoves(playerMoves);
+      getGameStart(gameStarted);
+    }, [playerMoves, getMoves, gameStarted, getGameStart]);
 
     return (
       <section className={style['grid-container']}>
