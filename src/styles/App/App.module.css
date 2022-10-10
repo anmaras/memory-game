@@ -2,6 +2,7 @@
   min-height: 100vh;
   display: grid;
   background-color: rgb(var(--Yankees-Blue));
+  overflow: hidden;
 }
 
 .white_bg {

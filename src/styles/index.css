@@ -51,6 +51,9 @@
   /* border radius */
   --border--modal-mobile: 10px;
   --border--modal-inside: 5px;
+
+  background-color: rgb(var(--Yankees-Blue));
+  overflow: hidden;
 }
 
 @media screen and (min-width: 768px) {
@@ -133,4 +136,5 @@ body {
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
   user-select: none;
+  overflow: hidden;
 }
