@@ -2,10 +2,10 @@ import React, { useEffect, useRef, useState } from 'react';
 import style from '../../../styles/Components/GameSolo/GameFooter.module.css';
 
 export const GameFooter = ({ getPlayerTime, data }) => {
+  const { gameStarted, playerMoves, gameOver } = data;
   const [timer, setTimer] = useState(0);
   const countRef = useRef(null);
   const timerRef = useRef('0');
-  const { gameStarted, playerMoves, gameOver } = data;
 
   useEffect(() => {
     clearInterval(countRef.current);
@@ -16,7 +16,11 @@ export const GameFooter = ({ getPlayerTime, data }) => {
     if (gameOver) {
       clearInterval(countRef.current);
     }
-  }, [gameStarted, gameOver]);
+    if (!gameStarted) {
+      clearInterval(countRef.current);
+      setTimer(0);
+    }
+  }, [gameOver, gameStarted]);
 
   useEffect(() => {
     getPlayerTime(timerRef.current.textContent);
