@@ -48,6 +48,23 @@ export const playerReducer = (state, action) => {
     };
   }
 
+  if (action.type === 'RESTART') {
+    return {
+      ...state,
+      gameStarted: false,
+      moveA: null,
+      moveB: null,
+      firstMove: false,
+      secondMove: false,
+      currId: null,
+      pairs: [],
+      gameOver: false,
+      playerMoves: 0,
+      movesComplete: false,
+      idPairs: [],
+    };
+  }
+
   if (action.type === 'GAME_OVER') {
     return { ...state, gameOver: true, gameStarted: false };
   }
