@@ -1,6 +1,6 @@
 import React from 'react';
-import { useState } from 'react';
 import { ButtonSecondary, ButtonPrimary } from '../UI';
+import { motion } from 'framer-motion';
 import style from '../../styles/Modals/Modals.module.css';
 import btnStyle from '../../styles/Components/UI/Buttons.module.css';
 
@@ -12,16 +12,17 @@ const GameEndModal = ({
   data,
 }) => {
   const { playerMoves, gameOver } = data;
-  const [menu, setMenu] = useState(gameOver);
 
   return (
     <>
-      <div
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 0.5 }}
         className={style.backdrop}
         onClick={() => modalVisibility(false)}
-      ></div>
-      <article className={style['modal-container']}>
-        {menu ? (
+      ></motion.div>
+      <motion.article className={style['modal-container']}>
+        {gameOver ? (
           <>
             <header className={style.header}>
               <h3 className={style.title}>You did it!</h3>
@@ -38,7 +39,9 @@ const GameEndModal = ({
               </div>
             </section>
             <footer className={style.footer}>
-              <ButtonPrimary />
+              <button className={btnStyle.buttonPrimary} onClick={restartGame}>
+                restart
+              </button>
               <ButtonSecondary
                 textInput="Setup New Game"
                 onClick={startNewGame}
@@ -55,7 +58,7 @@ const GameEndModal = ({
             <ButtonSecondary textInput="new game" onClick={startNewGame} />
           </footer>
         )}
-      </article>
+      </motion.article>
     </>
   );
 };

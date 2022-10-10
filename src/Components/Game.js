@@ -1,4 +1,6 @@
 import { GameHeader, GameGrid, GameFooter } from './GameSolo';
+import { motion } from 'framer-motion';
+
 import style from '../styles/Components/Game.module.css';
 
 export const Game = ({
@@ -11,7 +13,12 @@ export const Game = ({
   data,
 }) => {
   return (
-    <article className={style.game}>
+    <motion.article
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 1 }}
+      className={style.game}
+    >
       <GameHeader modalVisibility={modalVisibility} />
       <GameGrid
         getData={getData}
@@ -19,7 +26,7 @@ export const Game = ({
         grid={grid}
         shuffling={shuffle}
       />
-      <GameFooter getPlayerTime={getPlayerTime} data={data} />
-    </article>
+      <GameFooter getPlayerTime={getPlayerTime} data={data} shuffle={shuffle} />
+    </motion.article>
   );
 };

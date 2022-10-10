@@ -1,9 +1,14 @@
 import { MenuButtonBig, MenuSelection } from './UI';
+import { motion } from 'framer-motion';
 import style from '../styles/Components/StartGame.module.css';
 
 const StartGame = ({ changeTheme, changeGrid, gameStarted }) => {
   return (
-    <article className={style['section--game-start']}>
+    <motion.article
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      className={style['section--game-start']}
+    >
       <div>
         <h1 className={style['game-title']}>memory</h1>
       </div>
@@ -27,7 +32,7 @@ const StartGame = ({ changeTheme, changeGrid, gameStarted }) => {
         </div>
         <MenuButtonBig onClick={gameStarted} />
       </div>
-    </article>
+    </motion.article>
   );
 };
 
