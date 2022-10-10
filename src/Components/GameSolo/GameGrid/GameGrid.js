@@ -1,10 +1,4 @@
-import React, {
-  useCallback,
-  useEffect,
-  useReducer,
-  useRef,
-  useState,
-} from 'react';
+import React, { useCallback, useEffect, useReducer, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { iconArr6x6, iconArr4x4 } from '../../../utils/helpers/iconArrayMaker';
 import { playerReducer } from '../../../Reducers/playerReducer';
@@ -21,7 +15,6 @@ const initialPlayerValues = {
   gameOver: false,
   playerMoves: 0,
   movesComplete: false,
-  time: null,
   idPairs: [],
 };
 
@@ -33,7 +26,6 @@ const GameGrid = React.memo(({ theme, grid, shuffling, getData }) => {
     playerReducer,
     initialPlayerValues
   );
-  const [test, setTest] = useState(style.iconSelected);
 
   const { pairs, gameStarted, moveA, moveB } = playerState;
   const shuffle = (c) => {
@@ -117,16 +109,22 @@ const GameGrid = React.memo(({ theme, grid, shuffling, getData }) => {
         dispatch({
           type: 'NOT_PAIRS',
         });
-      }, 700);
+      }, 600);
     }
     console.log(playerState);
   }, [playerState, moveA, moveB]);
 
   useEffect(() => {
     if (pairs.length === finalArray.length && gameStarted) {
-      return dispatch({ type: 'GAME_OVER' });
+      dispatch({ type: 'GAME_OVER' });
     }
   }, [pairs.length, finalArray.length, gameStarted]);
+
+  useEffect(() => {
+    if (shuffle) {
+      dispatch({ type: 'RESTART' });
+    }
+  }, [shuffling]);
 
   useEffect(() => {
     getData(playerState);
