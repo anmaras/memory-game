@@ -3,6 +3,7 @@
   background-color: rgb(var(--Light-Periwinkle));
   padding-block: 11px;
   border-radius: 26px;
+  transition: 0.25s;
 }
 
 .menuSelection:hover,
@@ -11,5 +12,5 @@
 }
 
 .isActive {
-  background-color: rgb(var(--Charcoal-Solid));
+  background-color: rgb(var(--Silver-Lake-Blue));
 }
