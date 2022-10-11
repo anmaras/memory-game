@@ -1,5 +1,5 @@
 import { Game, StartGame, GameModal } from './Components';
-import { useState, useCallback, useEffect } from 'react';
+import { useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import style from './styles/App/App.module.css';
 

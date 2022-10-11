@@ -144,7 +144,6 @@ const GameGrid = React.memo(({ theme, grid, shuffling, getData }) => {
               className={[
                 `${style['grid-list-item']}`,
                 `${grid === 6 ? style.grid36 : style.grid16}`,
-                // `${playerState.currId === index ? style.iconSelected : ''}`,
                 `${
                   playerState.idPairs.includes(index)
                     ? style.iconSelected
@@ -164,14 +163,7 @@ const GameGrid = React.memo(({ theme, grid, shuffling, getData }) => {
               }}
               id={index}
             >
-              <p
-                className={[
-                  style['grid-item'],
-                  // `${isActive && id === index && style.iconVisible}`,
-                ].join(' ')}
-              >
-                {item}
-              </p>
+              <p className={[style['grid-item']].join(' ')}>{item}</p>
             </li>
           );
         })}

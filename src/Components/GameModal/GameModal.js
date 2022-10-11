@@ -1,5 +1,5 @@
 import React from 'react';
-import { ButtonSecondary, ButtonPrimary } from '../UI';
+import { ButtonSecondary } from '../UI';
 import { motion } from 'framer-motion';
 import style from '../../styles/Modals/Modals.module.css';
 import btnStyle from '../../styles/Components/UI/Buttons.module.css';
