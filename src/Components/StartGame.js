@@ -1,5 +1,5 @@
-import { useEffect, useState } from 'react';
-import { MenuButtonBig, MenuSelection } from './UI';
+import { useState } from 'react';
+import { MenuButtonBig } from './UI';
 import { motion } from 'framer-motion';
 import style from '../styles/Components/StartGame.module.css';
 import btnStyle from '../styles/Components/UI/MenuSelection.module.css';
