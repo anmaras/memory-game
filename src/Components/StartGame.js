@@ -1,8 +1,39 @@
+import { useEffect, useState } from 'react';
 import { MenuButtonBig, MenuSelection } from './UI';
 import { motion } from 'framer-motion';
 import style from '../styles/Components/StartGame.module.css';
+import btnStyle from '../styles/Components/UI/MenuSelection.module.css';
 
 const StartGame = ({ changeTheme, changeGrid, gameStarted }) => {
+  const [numbersActive, setNumbersActive] = useState({
+    grid4x4: false,
+    grid6x6: false,
+  });
+  const [iconsActive, setIconsActive] = useState({
+    number: false,
+    icon: false,
+  });
+
+  const setOptions = (e) => {
+    const value = e.target.textContent;
+    if (value === '4x4') {
+      setNumbersActive({ grid4x4: true, grid6x6: false });
+      changeGrid(4);
+    }
+    if (value === '6x6') {
+      setNumbersActive({ grid4x4: false, grid6x6: true });
+      changeGrid(6);
+    }
+    if (value === 'numbers') {
+      setIconsActive({ number: true, icon: false });
+      changeTheme(value);
+    }
+    if (value === 'icons') {
+      setIconsActive({ number: false, icon: true });
+      changeTheme(value);
+    }
+  };
+
   return (
     <motion.article
       initial={{ opacity: 0 }}
@@ -15,8 +46,28 @@ const StartGame = ({ changeTheme, changeGrid, gameStarted }) => {
       <div className={style.gameContainer}>
         <h3>select theme</h3>
         <div className={style['menu--selection-buttons']}>
-          <MenuSelection textInput="numbers" onClick={changeTheme} />
-          <MenuSelection textInput="icons" onClick={changeTheme} />
+          <button
+            onClick={(e) => {
+              setOptions(e);
+            }}
+            className={[
+              btnStyle.menuSelection,
+              `${iconsActive.number ? btnStyle.isActive : ''}`,
+            ].join(' ')}
+          >
+            numbers
+          </button>
+          <button
+            onClick={(e) => {
+              setOptions(e);
+            }}
+            className={[
+              btnStyle.menuSelection,
+              `${iconsActive.icon ? btnStyle.isActive : ''}`,
+            ].join(' ')}
+          >
+            icons
+          </button>
         </div>
         {/* <h3>number of players</h3>
         <div className={style['menu--players-numbers']}>
@@ -27,8 +78,28 @@ const StartGame = ({ changeTheme, changeGrid, gameStarted }) => {
         </div> */}
         <h3>grid size</h3>
         <div className={style['menu--grid-size']}>
-          <MenuSelection textInput="4x4" onClick={changeGrid} />
-          <MenuSelection textInput="6x6" onClick={changeGrid} />
+          <button
+            onClick={(e) => {
+              setOptions(e);
+            }}
+            className={[
+              btnStyle.menuSelection,
+              `${numbersActive.grid4x4 ? btnStyle.isActive : ''}`,
+            ].join(' ')}
+          >
+            4x4
+          </button>
+          <button
+            onClick={(e) => {
+              setOptions(e);
+            }}
+            className={[
+              btnStyle.menuSelection,
+              `${numbersActive.grid6x6 ? btnStyle.isActive : ''}`,
+            ].join(' ')}
+          >
+            6x6
+          </button>
         </div>
         <MenuButtonBig onClick={gameStarted} />
       </div>
