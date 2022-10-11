@@ -117,11 +117,6 @@ button {
   font-size: 16px;
 }
 
-button:focus,
-button:hover {
-  outline: 2px solid rgb(240, 84, 27);
-}
-
 button:active {
   scale: 0.98;
 }
