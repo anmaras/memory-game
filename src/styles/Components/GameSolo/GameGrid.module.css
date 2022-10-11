@@ -25,13 +25,8 @@
   background-color: rgb(var(--Charcoal-Solid));
   display: grid;
   place-items: center;
-  /* color: rgb(var(--Lotion-white)); */
   cursor: pointer;
 }
-
-/* .grid-list-item:hover {
-  background-color: rgb(var(--Light-Periwinkle));
-} */
 
 .grid-item {
   position: relative;
