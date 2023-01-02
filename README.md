@@ -11,7 +11,7 @@ Its a small game tha helps you keep your memory sharp while trying to match pair
 
 - React.js
 - Framer-motion
-- Fortawesome
+- Fontawesome
 
 ## What i learned
 
